@@ -1,0 +1,214 @@
+/* Reset and general styles */
+body {
+    font-family: segoe UI, Segoe UI;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* Container for centering quiz */
+.quiz {
+    max-width: 800px; /* Adjust as needed */
+    width: 100%; /* Full width of container within max-width */
+    padding: 20px; /* Add padding around the content */
+    background-color: rgba(255, 255, 255, 0.9); /* Background color for the quiz container */
+    border-radius: 10px; /* Smoothened corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+/* Header styles */
+header {
+    width: calc(100% - 40px) ; /* Adjust width minus margin space */
+    height: 70px; /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out header content */
+    position: relative;
+    border-radius: 10px;
+    background-color: rgb(31, 175, 132); /* Fallback color */
+    padding: 0 10px; /* Padding to space out header content */
+    box-sizing: border-box; /* Include padding in width calculation */
+    margin-top: 20px; /* Space at the top of the header */
+    margin-left: auto; /* Adds space on the left side */
+    margin-right: auto; /* Adds space on the right side */
+}
+
+
+
+/* Header sections */
+.header-left {
+    color: white;
+    text-align: left;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Header buttons */
+.header-btn {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    border: 2px solid lime;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0; /* Remove default margin */
+    transition: background-color 0.3s;
+}
+
+.header-btn:hover {
+    background-color: rgba(255, 255, 255, 1); /* Full white on hover */
+    border: 2px solid lime;
+}
+
+/* Button styles */
+.answer-btn {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid lime;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; /* Make text bold */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.answer-btn.correct {
+    background-color: green; /* Correct answer button */
+    color: white;
+}
+
+.answer-btn.incorrect {
+    background-color: red; /* Incorrect answer button */
+    color: white;
+}
+
+/* Button for the 'Next' and 'Finish' actions */
+.next-btn {
+    background-color: rgb(31, 175, 132); /* Green background */
+    color: white;
+    border: 2px solid lime;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block; /* Ensure the button takes up full width if needed */
+    margin: 10px auto; /* Center align and space around */
+}
+
+.next-btn:hover {
+    background-color: rgb(26, 145, 108); /* Darker green on hover */
+}
+
+/* Popup styling */
+.popup {
+    position: fixed;
+    top: 20px; /* Adjust the vertical position as needed */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: 2px solid lime; /* Lime border */
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    z-index: 1000; /* Ensure it appears above other content */
+    display: none; /* Hide by default */
+}
+
+.popup.visible {
+    display: block; /* Show the popup */
+}
+
+.popup p {
+    margin: 0;
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+/* Progress bar styles */
+.progress-bar-container {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    height: 20px;
+}
+
+/* Additional styling for topics */
+.topics {
+    width: 100%;
+    max-width: 800px; /* Adjust maximum width as needed */
+    display: flex;
+    flex-wrap: wrap; /* Allow topics to wrap to the next line */
+    justify-content: space-around; /* Center items horizontally */
+    padding: 20px;
+}
+
+.topic {
+    text-align: center;
+    margin-bottom: 20px; /* Space between topics */
+    width: calc(50% - 20px); /* Half of the container width minus margin */
+    max-width: 250px; /* Maximum width of each topic */
+}
+
+.quiz-image {
+    width: 100%; /* Make the image fill its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin-bottom: 10px; /* Space between image and button */
+}
+
+.topic-btn {
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgb(31, 175, 132); /* Button background color */
+    color: white;
+    border: 2px solid lime;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.topic-btn:hover {
+    background-color: rgb(26, 145, 108); /* Darker shade for hover effect */
+}
+
+/* Welcome text styling */
+main {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Stack items vertically */
+    min-height: 100vh; /* Ensure the main content takes full viewport height */
+    text-align: center; /* Center text */
+    padding: 20px; /* Add padding around the main content */
+    box-sizing: border-box; /* Include padding in element's width and height */
+}
+
+main p {
+    font-size: 18px; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    color: white; /* White text color for contrast */
+    background-color: rgb(31, 175, 132); /* Semi-transparent dark green background */
+    border: 2px solid lime; /* Lime border for contrast */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Add padding inside the background */
+    margin: 20px; /* Space around the text */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for a 3D effect */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow for better readability */
+    max-width: 300px; /* Maximum width for the text box */
+    width: 100%; /* Full width within max-width */
+}

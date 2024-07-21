@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignite quiz</title>
+    <style>
+        body {
+             font-family: Arial, sans-serif;
+             margin: 0;
+             padding: 0;
+        }
+
+        .home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-center {
+            text-align: center;
+        }
+
+        .header-center h1 {
+            margin: 0;
+        }
+
+        .topics {
+            width: 100%;
+            max-width: 800px; /* Adjust maximum width as needed */
+            display: flex;
+            flex-wrap: wrap; /* Allow topics to wrap to the next line */
+            justify-content: space-around; /* Center items horizontally */
+            padding: 20px;
+        }
+
+        .topic {
+            text-align: center;
+            margin-bottom: 20px; /* Space between topics */
+            width: calc(50% - 20px); /* Half of the container width minus margin */
+            max-width: 250px; /* Maximum width of each topic */
+        }
+
+        .quiz-image {
+            width: 100%; /* Make the image fill its container */
+            height: auto; /* Maintain aspect ratio */
+            display: block;
+            margin-bottom: 10px; /* Space between image and button */
+        }
+
+        .topic-btn {
+            display: block;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: rgb(31, 175, 132); /* Button background color */
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .topic-btn:hover {
+            background-color: rgb(31, 175, 132); /* Button hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="home">
+        <header>
+            <div class="header-center">
+                <h1>Ignite quizzes</h1>
+            </div>
+        </header>
+        <main>
+            <div class="topics">
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 1.html" class="topic-btn">Financial Health</a>
+                </div>
+                <div class="topic">
+                    <img src="mental.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 2.html" class="topic-btn">Mental Health</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 3.html" class="topic-btn">Physical Health</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz4.html" class="topic-btn">Social Health</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 5.html" class="topic-btn">Nutrition</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 6.html" class="topic-btn">Sleep</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 7.html" class="topic-btn">General Health</a>
+                </div>
+                <div class="topic">
+                    <img src="Finance.jpg" alt="Finance" class="quiz-image">
+                    <a href="Quiz 8.html" class="topic-btn">Balance</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

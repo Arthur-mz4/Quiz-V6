@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game App</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="quiz">
+        <header>
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='Homepage.html'">Back</button>
+            </div>
+            <div class="header-center"></div>
+            <div class="header-right">
+                <div class="timer" id="timer">60</div>
+            </div>
+        </header>
+        <main>
+            <div class="question-container">
+                <img src="mental.jpg" alt="Quiz Image" class="quiz-image">
+                <p id="question-text">Question will go here</p>
+                <div class="answers">
+                    <button class="answer-btn" data-correct="false">Answer 1</button>
+                    <button class="answer-btn" data-correct="true">Answer 2</button>
+                    <button class="answer-btn" data-correct="false">Answer 3</button>
+                    <button class="answer-btn" data-correct="false">Answer 4</button>
+                </div>
+                <button id="next-btn" class="next-btn" disabled>Next</button>
+                <button id="finish-btn" class="next-btn" style="display: none;" onclick="window.location.href='Completion.html'">Finish</button>
+                <div id="popup" class="popup"></div>
+            </div>
+        </main>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
+    <script src="quizz1.js" defer></script>
+</body>
+</html>
