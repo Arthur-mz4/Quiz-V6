@@ -2,7 +2,7 @@ let timer;
 let timeLeft = 30;
 let isQuizActive = true;
 let currentQuestionIndex = 0;
-const totalQuestions = 3; // Update this with the total number of questions
+const totalQuestions = 5; // Update this with the total number of questions
 
 // Example questions array with explanations
 const questions = [
@@ -13,18 +13,30 @@ const questions = [
         explanation: "Paying bills on time helps improve your credit score."
     },
     {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Jupiter", "Saturn"],
-        correct: "Mars",
-        explanation: "Mars is known as the Red Planet because of its reddish appearance, which is due to iron oxide on its surface."
+        question: "What's a smart strategy for saving money?",
+        options: ["Spending first", "Automating savings", "Ignoring savingser", "Borrowing moneyn"],
+        correct: "Automating savings",
+        explanation: "Automating savings ensures consistent saving without the need for manual transfers."
     },
     {
-        question: "What is the largest ocean on Earth?",
-        options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-        correct: "Pacific Ocean",
-        explanation: "The Pacific Ocean is the largest and deepest ocean on Earth, covering more than 63 million square miles."
+        question: "What's a common financial planning mistake?",
+        options: ["Not having an emergency fund", "Over-saving", "Under-spending", "Budgeting"],
+        correct: "Not having an emergency fund",
+        explanation: "Not having an emergency fund can lead to financial instability during unexpected events."
+    },
+    {
+        question: "What's a benefit of investing early?",
+        options: ["Compound interest", "Immediate wealth", "Guaranteed success", "No risk"],
+        correct: "Compound interest",
+        explanation: "Investing early allows for the benefits of compound interest, growing your wealth over time."
+    },
+    {
+        question: "How can you avoid impulse buying?",
+        options: ["Avoiding lists", "Making a shopping list", "Shopping when hungry", "Ignoring budgets"],
+        correct: "Making a shopping list",
+        explanation: "Making a shopping list helps avoid impulse purchases and stick to your budget."
     }
-];
+];  
 
 window.onload = function() {
     loadQuestion();

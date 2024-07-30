@@ -1,99 +1,136 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const topic1Questions = [
-        { question: "What is the capital of France?", answers: ["Berlin", "Madrid", "Paris", "Lisbon"], correctIndex: 2 },
-        { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Saturn"], correctIndex: 1 },
-        { question: "What is the largest ocean on Earth?", answers: ["Atlantic", "Indian", "Arctic", "Pacific"], correctIndex: 3 },
-        { question: "Which element has the chemical symbol O?", answers: ["Gold", "Oxygen", "Silver", "Iron"], correctIndex: 1 }
-    ];
+let timer;
+let timeLeft = 30;
+let isQuizActive = true;
+let currentQuestionIndex = 0;
+const totalQuestions = 5; // Update this with the total number of questions
 
-    let currentQuestion = 0;
-    let score = 0;
-
-    const questionText = document.getElementById('question-text');
-    const answerButtons = document.querySelectorAll('.answer-btn');
-    const progressBar = document.getElementById('progress-bar');
-    const progressCircle = document.querySelector('.progress-circle');
-    const nextButton = document.getElementById('next-btn');
-
-    function loadQuestion() {
-        const question = topic1Questions[currentQuestion];
-        questionText.textContent = question.question;
-
-        answerButtons.forEach((button, index) => {
-            button.textContent = question.answers[index];
-            button.dataset.correctIndex = question.correctIndex;
-            button.style.backgroundColor = ''; // Reset button color
-            button.disabled = false; // Re-enable button
-            button.addEventListener('click', () => checkAnswer(button));
-        });
-
-        nextButton.disabled = true; // Disable next button initially
-        nextButton.textContent = (currentQuestion === topic1Questions.length - 1) ? 'Finish' : 'Next'; // Update button text
-        updateProgress();
+// Example questions array with explanations
+const questions = [
+    {
+        question: "What can help reduce stress?",
+        options: ["Watching scary movies", "Meditation", "Skipping meals", "Overworking"],
+        correct: "Meditation",
+        explanation: "Meditation helps reduce stress and promotes relaxation."
+    },
+    {
+        question: "What's a good way to relax?",
+        options: ["Arguing", "Listening to music", "Ignoring problems", " Eating junk food"],
+        correct: "Listening to music",
+        explanation: "Listening to music can be very relaxing and reduce stress levels."
+    },
+    {
+        question: "What activity can boost your mood?",
+        options: ["Complaining", "Helping others", "Skipping exercise", " Eating fast food"],
+        correct: "Helping others",
+        explanation: "Helping others can boost your mood and provide a sense of fulfillment."
+    },
+    {
+        question: "How often should you ideally practice mindfulness?",
+        options: ["Once a month", "Every day", " Never", "Only when stressed"],
+        correct: "Every day",
+        explanation: "Practicing mindfulness daily can improve your mental well-being."
+    },
+    {
+        question: "What's a benefit of deep breathing?",
+        options: ["Increase stress", "Improve focus", "Feel sleepy", "Get angry"],
+        correct: "Improve focus",
+        explanation: "Deep breathing improves focus and reduces stress."
     }
+];  
 
-    function checkAnswer(button) {
-        const correctIndex = button.dataset.correctIndex;
-        const selectedAnswer = button.textContent;
-
-        if (selectedAnswer === topic1Questions[currentQuestion].answers[correctIndex]) {
-            button.style.backgroundColor = 'green'; // Correct answer
-            score++;
-        } else {
-            button.style.backgroundColor = 'red'; // Incorrect answer
-            answerButtons[correctIndex].style.backgroundColor = 'green'; // Highlight correct answer
-
-            // Display pop-up with correct answer
-            const popup = document.createElement('div');
-            popup.classList.add('popup');
-            popup.textContent = `Wrong answer! The correct answer is: ${topic1Questions[currentQuestion].answers[correctIndex]}`;
-            document.body.appendChild(popup);
-
-            // Remove popup after a few seconds
-            setTimeout(() => {
-                popup.remove();
-            }, 5000);
-        }
-
-        // Disable all answer buttons after selection
-        answerButtons.forEach(btn => {
-            btn.disabled = true;
-        });
-
-        // Enable next button
-        nextButton.disabled = false;
-    }
-
-    function nextQuestion() {
-        if (currentQuestion < topic1Questions.length - 1) {
-            currentQuestion++;
-            resetButtons();
-            loadQuestion();
-        } else {
-            // Quiz completed, navigate to the completion page
-            window.location.href = `completion.html?score=${score}`;
-        }
-    }
-
-    function resetButtons() {
-        answerButtons.forEach(btn => {
-            btn.style.backgroundColor = ''; // Reset button color
-            btn.disabled = false; // Re-enable button
-        });
-    }
-
-    function updateProgress() {
-        const progress = (currentQuestion / topic1Questions.length) * 100;
-        progressBar.style.width = `${progress}%`;
-        progressCircle.textContent = `${Math.round(progress)}%`;
-    }
-
-    // Event listener for next button
-    nextButton.addEventListener('click', nextQuestion);
-
-    // Start with an empty progress bar
-    updateProgress();
-
-    // Load the first question on page load
+window.onload = function() {
     loadQuestion();
-});
+    startTimer();
+
+    document.querySelectorAll('.answer-btn').forEach(button => {
+        button.addEventListener('click', handleAnswerClick);
+    });
+
+    document.getElementById('next-btn').addEventListener('click', loadNextQuestion);
+};
+
+function startTimer() {
+    clearInterval(timer); // Clear any existing timer
+    timeLeft = 30; // Reset the timer to 30 seconds
+    document.getElementById('timer').textContent = timeLeft;
+    if (isQuizActive) {
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                endQuiz();
+            }
+        }, 1000);
+    }
+}
+
+function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    document.getElementById('question-text').textContent = question.question;
+
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    answerButtons.forEach((button, index) => {
+        button.textContent = question.options[index];
+        button.setAttribute('data-correct', question.options[index] === question.correct);
+        button.classList.remove('correct', 'incorrect'); // Remove any previous classes
+        button.disabled = false;
+    });
+
+    document.getElementById('popup').textContent = '';
+    document.getElementById('popup').classList.remove('correct', 'incorrect'); // Remove any previous class
+    document.getElementById('next-btn').disabled = true;
+}
+
+function handleAnswerClick(event) {
+    const button = event.target;
+    const isCorrect = button.getAttribute('data-correct') === 'true';
+    const correctAnswer = questions[currentQuestionIndex].correct;
+    const explanation = questions[currentQuestionIndex].explanation;
+
+    if (isCorrect) {
+        button.classList.add('correct');
+        document.getElementById('popup').textContent = ''; // Clear any previous popup message
+        document.getElementById('popup').classList.remove('incorrect'); // Remove incorrect class if it was added
+        document.getElementById('popup').classList.add('correct'); // Add correct class
+    } else {
+        button.classList.add('incorrect');
+        document.getElementById('popup').textContent = `Incorrect! The correct answer is ${correctAnswer}. ${explanation}`;
+        document.getElementById('popup').classList.remove('correct'); // Remove correct class if it was added
+        document.getElementById('popup').classList.add('incorrect'); // Add incorrect class
+        // Highlight the correct answer with a green background
+        document.querySelectorAll('.answer-btn').forEach(btn => {
+            if (btn.getAttribute('data-correct') === 'true') {
+                btn.classList.add('correct-highlight');
+            }
+        });
+    }
+
+    document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
+    document.getElementById('next-btn').disabled = false;
+}
+
+function loadNextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < totalQuestions) {
+        loadQuestion();
+        updateProgressBar();
+        startTimer(); // Restart the timer for the next question
+    } else {
+        endQuiz();
+    }
+}
+
+function updateProgressBar() {
+    const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+}
+
+function endQuiz() {
+    document.getElementById('popup').textContent = 'Time is up!';
+    document.getElementById('popup').classList.add('incorrect'); // Ensure popup has incorrect class for time up
+    document.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('finish-btn').style.display = 'block';
+    
+}
